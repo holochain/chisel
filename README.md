@@ -25,7 +25,11 @@ cat out.txt | chisel tryorama demux -v -d some/dir/that/exists
 If you don't care to keep your raw logs around, you can also pipe the log output directly into chisel for a more streamlined workflow:
 
 ```
-npm test |& tee >(chisel tryorama demux -v -d some/dir/that/exists)
+npm test |& chisel tryorama demux -v -d some/dir/that/exists
 ```
 
-This still prints the raw logs to stdout via tee, while passing stdin to chisel.
+If you still want to see the raw logs in your terminal, you can split the stream with tee like so:
+
+```
+npm test |& tee >(chisel tryorama demux -v -d some/dir/that/exists)
+```
