@@ -9,6 +9,10 @@ use structopt::StructOpt;
 use tryorama::TryoramaCmd;
 
 #[derive(Debug, StructOpt)]
+#[structopt(
+    name = "chisel",
+    about = "Stream-based CLI tool for parsing Holochain logs"
+)]
 struct Opt {
     #[structopt(subcommand)]
     cmd: Option<Subcommand>,

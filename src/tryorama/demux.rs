@@ -60,7 +60,10 @@ impl DemuxCmd {
             file.flush().map_err(|e| e.to_string())?;
         }
         if self.verbose {
-            println!("Extracted {} conductor logs from input:", files.len());
+            println!(
+                "\nchisel: extracted {} conductor logs from input:",
+                files.len()
+            );
             for name in files
                 .keys()
                 .map(|name| log_filename(&self.dir, name))
