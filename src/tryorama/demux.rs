@@ -52,6 +52,8 @@ impl DemuxCmd {
                                 entry.insert(file);
                             }
                         }
+                    } else {
+                        active_conductor = None;
                     }
                 }
             }

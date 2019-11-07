@@ -2,6 +2,11 @@
 
 Swiss-army knife CLI tool for making more sense of Holochain logs of all kinds. Carve away at the Uncarved Block (of raw log text).
 
+## Installation
+
+    cargo install --path .
+    chisel --version
+
 ## Usage
 
 chisel reads logs from stdin and writes the transformed output to stdout, when possible. It is intended to be used with command-line pipes.
@@ -9,6 +14,8 @@ chisel reads logs from stdin and writes the transformed output to stdout, when p
 ### try-o-rama demuxer
 
 The only command available currently is `chisel tryorama demux`. This takes a log file from a [try-o-rama](https://github.com/holochain/try-o-rama) test run and splits (demultiplexes) it into one file per conductor.
+
+#### Two-step recipe
 
 For example, if `npm test` runs your try-o-rama test suite, you might prefer to run it such that prints the output to a file as well as stdout:
 
@@ -22,6 +29,8 @@ With the log file in hand, you can pipe it through chisel to split it into sever
 cat out.txt | chisel tryorama demux -v -d some/dir/that/exists
 ```
 
+#### One-step recipe
+
 If you don't care to keep your raw logs around, you can also pipe the log output directly into chisel for a more streamlined workflow:
 
 ```
@@ -32,4 +41,12 @@ If you still want to see the raw logs in your terminal, you can split the stream
 
 ```
 npm test |& tee >(chisel tryorama demux -v -d some/dir/that/exists)
+```
+
+#### One-step workflow with raw log file
+
+Finally, if you want to have a copy of your raw logs in a file as well as one file per conductor, while still seeing everything on stdout, you can put it all together like so:
+
+```
+npm test |& tee raw.txt |& tee >(chisel tryorama demux -v -d some/dir/that/exists)
 ```
